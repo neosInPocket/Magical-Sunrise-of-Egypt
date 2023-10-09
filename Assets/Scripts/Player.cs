@@ -52,6 +52,8 @@ public class Player : MonoBehaviour
 			if (circle == currentCircle) return;
 			
 			currentCircle = circle;
+			rb.gravityScale = 0;
+			rb.velocity = Vector2.zero;
 		}
 	}
 	
