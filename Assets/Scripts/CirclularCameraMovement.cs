@@ -33,13 +33,17 @@ public class CirclularCameraMovement : MonoBehaviour
 		{
 			isStarted = false;
 		}
-		
-		
 	}
 	
 	private void CameraFollow(GameCircle currentCircle, GameCircle nextCircle)
 	{
 		destination = nextCircle.transform.position.y;
 		isStarted = true;
+	}
+	
+	public void ResetCamera()
+	{
+		isStarted = false;
+		transform.position = Vector2.zero;
 	}
 }

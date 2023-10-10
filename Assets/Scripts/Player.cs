@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
 {
 	[SerializeField] private GameCircle firstCircle;
 	[SerializeField] private Rigidbody2D rb;
-	[SerializeField] private float rotationSpeed;
 	[SerializeField] private float launchSpeed;
 	private bool isCentered;
 	private GameCircle currentCircle;
@@ -18,6 +17,8 @@ public class Player : MonoBehaviour
 	
 	public Action<GameCircle> CircleChanged;
 	public Action<GameCircle, GameCircle> HeightChanged;
+	private float[] rotationSpeeds = new float[4] {70, 55, 40, 25};
+	private float rotationSpeed;
 	
 	private void Start()
 	{
@@ -26,6 +27,12 @@ public class Player : MonoBehaviour
 		Touch.onFingerDown += LaunchPlayer;
 		
 		SetPlayerInPosition();
+		Initialize();
+	}
+	
+	public void Initialize()
+	{
+		rotationSpeed = rotationSpeeds[MainMenuController.CurrentRotationSpeedUpgrade];
 	}
 	
 	private void Update()
@@ -44,7 +51,7 @@ public class Player : MonoBehaviour
 		rb.AddForce(-transform.up * launchSpeed, ForceMode2D.Impulse);
 	}
 	
-	private void SetPlayerInPosition()
+	public void SetPlayerInPosition()
 	{
 		rotationDirection = 1;
 		
@@ -61,7 +68,6 @@ public class Player : MonoBehaviour
 		if (collider.TryGetComponent(out GameCircle circle))
 		{
 			if (circle == currentCircle) return;
-			Debug.Log("Circle changed");
 			
 			rotationDirection *= -1;
 			RotatePlayerToTangent(circle.transform);
