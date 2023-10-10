@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
 {
-	[SerializeField] private Canvas _backgroundCanvas;
-	[SerializeField] private Camera _mainCamera;
-	[SerializeField] private Camera _backGroundCamera;
 	[SerializeField] private TutorialScreen _tutor;
 	[SerializeField] private UIHealth _uiHealth; 
 	[SerializeField] private FadeScreen _fadeScreen;
@@ -22,6 +21,10 @@ public class GameController : MonoBehaviour
 	[SerializeField] private Transform circleContainer;
 	[SerializeField] private Player player;
 	[SerializeField] private CirclularCameraMovement cameraMovement;
+	[SerializeField] private GameCircle firstCircle;
+	[SerializeField] private CircleSpawner circleSpawner;
+	[SerializeField] private DeathZoneTrigger deathZoneTriggerR;
+	[SerializeField] private DeathZoneTrigger deathZoneTriggerL;
 	private float _playDelay;
 	public static int _levelCoins;
 	private static int _levelMaxPoints;
@@ -34,18 +37,23 @@ public class GameController : MonoBehaviour
 	{
 		_isPlaying = false;
 		Initialize();
+		player.TakeDamageEvent += OnEventHandler;
 	}
 	
 	public void Initialize()
 	{
+		deathZoneTriggerL.Initialize();
+		deathZoneTriggerR.Initialize();
+		
 		cameraMovement.ResetCamera();
-		player.SetPlayerInPosition();
+		player.SetPlayerInPosition(firstCircle);
 		DeleteCircles();
 		player.Initialize();
+		SetPlayerDefaults();
+		circleSpawner.Initialize();
 		
 		_isPlaying = false;
 		isWon = false;
-		_backgroundCanvas.worldCamera = _backGroundCamera;
 		
 		lives = MainMenuController.CurrentLivesUpgrade;
 		_levelMaxPoints = (int)(Mathf.Log(MainMenuController.CurrentLevel + 2) * 5);
@@ -63,14 +71,28 @@ public class GameController : MonoBehaviour
 			MainMenuController.IsFirstTime = "no";
 			SaveLoad.Save();
 			isTutor = true;
+			_tutor.TutorialEnd += OnTutorialEnd;
 			_tutor.PlayTutor();
 		}
 		else
 		{
 			_countDownScreen.gameObject.SetActive(true);
 			_countDownScreen.Show();
+			StartCoroutine(PlayDelay());
 		}
+	}
+	
+	private void OnTutorialEnd()
+	{
+		_countDownScreen.gameObject.SetActive(true);
+		_countDownScreen.Show();
 		StartCoroutine(PlayDelay());
+	}
+	
+	private void SetPlayerDefaults()
+	{
+		player.SpriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+		player.TrailRenderer.Clear();
 	}
 	
 	private void OnEventHandler(bool value)
@@ -106,13 +128,13 @@ public class GameController : MonoBehaviour
 			_defeatScreen.gameObject.SetActive(true);
 			_defeatScreen.Show();
 			DeleteCoins();
-			AudioEvent.RaiseEvent(AudioTypes.PlayerDie);
 			return;
 		}
 	}
 	
 	public void ReturnToTheMainMenu()
 	{
+		
 		_fadeScreen.Fade();
 		_fadeScreen.OnFadeEnd += OnFadeMainMenuEnd;
 	}
@@ -120,15 +142,12 @@ public class GameController : MonoBehaviour
 	private void OnFadeMainMenuEnd()
 	{
 		_fadeScreen.OnFadeEnd -= OnFadeMainMenuEnd;
-		SceneManager.LoadScene(1);
+		_gameScreen.gameObject.SetActive(false);
+		SceneManager.LoadScene("MainMenuScene");
 	}
 	
 	private IEnumerator PlayDelay()
 	{
-		if (isTutor)
-		{
-			_playDelay = 18f;
-		}
 		yield return new WaitForSeconds(_playDelay + 0.5f);
 		_countDownScreen.gameObject.SetActive(false);
 		_isPlaying = true;

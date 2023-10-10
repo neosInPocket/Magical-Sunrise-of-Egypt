@@ -12,7 +12,7 @@ public class MainMenuController : MonoBehaviour
 	[SerializeField] private ShopScreen _shopScreen;
 	[SerializeField] private MainMenuScreen _menuScreen;
 	[SerializeField] private SettingsScreen settingsScreen;
-	[SerializeField] private GameController gameController;
+	[SerializeField] private Camera mainCamera;
 	
 	public static int CurrentLevel { get; set; } = 0;
 	public static int Coins { get; set; } = 0;
@@ -22,7 +22,6 @@ public class MainMenuController : MonoBehaviour
 	
 	private void Start()
 	{
-		ClearProgress();
 		Initialize();
 	}
 	
@@ -30,6 +29,8 @@ public class MainMenuController : MonoBehaviour
 	{
 		SaveLoad.Load();
 		_menuScreen.gameObject.SetActive(true);
+		_backgroundCanvas.worldCamera = mainCamera;
+		mainCamera.cullingMask = LayerMask.GetMask("TransparentFX", "Ignore Raycast", "Water", "UI", "Rig");
 	}
 	
 	public void GetToGame()
@@ -83,8 +84,7 @@ public class MainMenuController : MonoBehaviour
 	{
 		_fadeScreen.OnFadeEnd -= LoadGame;
 		_menuScreen.gameObject.SetActive(false);
-		gameController.Initialize();
-		Camera.main.cullingMask = LayerMask.GetMask("Default", "TransparentFX", "Ignore Raycast", "Water", "UI", "Rig");
+		SceneManager.LoadScene("GameScene");
 	}
 	
 	public void Save()

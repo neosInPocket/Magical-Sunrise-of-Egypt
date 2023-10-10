@@ -74,8 +74,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: d0afe2107ef7e7f40ac270ce8e246465, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: c2349bd60eb566f4285869247b1387ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,6 +133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de13028cb75e024fafcdd0c92320aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 2036167311366888163, guid: fb3bade4e84982942ac5069114f47941, type: 3}
   circleCollider2D: {fileID: 3583247927751988804}
   spriteRenderer: {fileID: 2149397245247726289}
   isStatic: 0
+  isSpawnCoin: 1
+  coinSpawnChance: 0.5
+  coinContainer: {fileID: 0}

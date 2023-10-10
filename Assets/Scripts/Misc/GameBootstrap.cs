@@ -10,8 +10,5 @@ public class GameBootstrap : MonoBehaviour
 	{
 		_mainMenuController.Initialize();
 		
-		#if UNITY_EDITOR
-		_mainMenuController.ClearProgress();
-		#endif
 	}
 }

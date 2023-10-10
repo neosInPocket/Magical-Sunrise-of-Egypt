@@ -4,7 +4,5 @@ using UnityEngine;
 
 public enum AudioTypes
 {
-	BallDrop,
-	CoinCollect,
-	PlayerDie
+	CircleChanged
 }

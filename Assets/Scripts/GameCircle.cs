@@ -21,22 +21,24 @@ public class GameCircle : MonoBehaviour
 	
 	private void Start()
 	{
-		if (!isSpawnCoin) return;
+		if (!isStatic)
+		{
+			var rndSize = Random.Range(minSize, maxSize);
+			spriteRenderer.size = new Vector2(rndSize, rndSize);
+			circleCollider2D.radius = rndSize / 2;
+			
+			var screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+			var minX = -screenBounds.x + circleCollider2D.radius + 0.5f;
+			var maxX = screenBounds.x - circleCollider2D.radius - 0.5f;
+			
+			var newPosition = new Vector2(Random.Range(minX, maxX), transform.position.y);
+			transform.position = newPosition;
+		}
 		
-		SpawnCoin();
-		
-		if (isStatic) return;
-		
-		var rndSize = Random.Range(minSize, maxSize);
-		spriteRenderer.size = new Vector2(rndSize, rndSize);
-		circleCollider2D.radius = rndSize / 2;
-		
-		var screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-		var minX = -screenBounds.x + circleCollider2D.radius + 0.5f;
-		var maxX = screenBounds.x - circleCollider2D.radius - 0.5f;
-		
-		var newPosition = new Vector2(Random.Range(minX, maxX), transform.position.y);
-		transform.position = newPosition;
+		if (isSpawnCoin)
+		{
+			SpawnCoin();
+		}
 	}
 	
 	public void SpawnCoin()
