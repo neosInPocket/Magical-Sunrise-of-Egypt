@@ -11,4 +11,52 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 4f7b27440a84fb4488fd2ab7946b11a7
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1.unity
+    guid: 2a606c5fbc0f59844a028eaabb1c0c58
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 1.unity
+    guid: 7359ccd0ee8c77c48a36983141a923ef
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 2.unity
+    guid: 3eb823a2320b0374391c1d41eeae01f7
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 3.unity
+    guid: 7e061e79780e6f246a63423ea168bf8b
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 4.unity
+    guid: 9767239c904ef4a4196a3716c6c13f76
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 5.unity
+    guid: cd47ab6b08349534e8824ffa4262efae
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 6.unity
+    guid: 1609b7340b2e91f4f89a8facc97bd315
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 7.unity
+    guid: 7191640777a18ea409479035fcd891ad
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 8.unity
+    guid: 40256bc108dd48b46a28478ab333d1ca
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 9.unity
+    guid: af2239a0600f649469abb1553f89b6a5
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 10.unity
+    guid: baf3820890aff29468d22159412a66ef
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 11.unity
+    guid: 7616f36ec29df904f9a99efe79bdc8f6
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 12.unity
+    guid: 176047fe7a5da3a4eadadeb8b78ea2da
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 13.unity
+    guid: 900f651ed1546734e9d38961a85f1868
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 14.unity
+    guid: 3c9930b073887e9459f7999b49fabd3d
+  - enabled: 1
+    path: Assets/Scenes/GameProcessing1 15.unity
+    guid: 6c855feb1f73175489acaefbd8ae8c5f
   m_configObjects: {}

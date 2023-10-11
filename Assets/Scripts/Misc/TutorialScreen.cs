@@ -27,7 +27,7 @@ public class TutorialScreen : MonoBehaviour
 	
 	public void PlayTutor()
 	{
-		_text.text = "Welcome to Pharaoh's Leap!";
+		_text.text = "Welcome to Magical Sunrise of Egypt!";
 		_text.gameObject.SetActive(true);
 		back.gameObject.SetActive(true);
 		character.gameObject.SetActive(true);
