@@ -9,6 +9,5 @@ public class GameBootstrap : MonoBehaviour
  	void Start()
 	{
 		_mainMenuController.Initialize();
-		
 	}
 }

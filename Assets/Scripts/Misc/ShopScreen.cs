@@ -49,7 +49,7 @@ public class ShopScreen : MonoBehaviour
 		_livesButton.interactable = true;
 		_coinsText.text = MainMenuController.Coins.ToString();
 		rotSpeedUpgradeAmount.text = "Rot. speed upgrade: " + MainMenuController.CurrentRotationSpeedUpgrade.ToString() + "/3";
-		_maxLivesUpgradeAmount.text = "Lives amount upgrade: " + MainMenuController.CurrentLivesUpgrade.ToString() + "/3";
+		_maxLivesUpgradeAmount.text = "Max lives: " + MainMenuController.CurrentLivesUpgrade.ToString() + "/3";
 		
 		if (MainMenuController.CurrentRotationSpeedUpgrade == 3 || MainMenuController.Coins - 50 < 0)
 		{
